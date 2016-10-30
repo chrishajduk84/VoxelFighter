@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Square : MonoBehaviour {
-	public GameObject selector , brick;
+	public GameObject selector , brick, cannon;
 	private int gridX, gridY, helperID;
 	private float x, z;
 
@@ -16,8 +16,8 @@ public class Square : MonoBehaviour {
 
 	public void PlaceBrick() {
 		// Place brick component, above the last brick on the square
-		this.brick.GetComponent<BrickController> ().square = this;
-		Instantiate (brick, new Vector3 (this.x, 0.5f + numBricks, this.z), Quaternion.identity);
+		this.cannon.GetComponent<BrickController> ().square = this;
+		Instantiate (this.cannon, new Vector3 (this.x, 0.5f + numBricks, this.z), Quaternion.identity);
 		this.numBricks += 1;
 	}
 

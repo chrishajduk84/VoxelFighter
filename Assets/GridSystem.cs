@@ -6,7 +6,7 @@ public class GridSystem : MonoBehaviour {
 	public LayerMask hoverableLayers;
 
 	//Grid Constants
-	const float gridSpacing = 1.01f;
+	const float gridSpacing = 1.02f;
 	const int X_MAX = 6;
 	const int Z_MAX = 6;
 
