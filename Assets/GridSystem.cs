@@ -49,12 +49,20 @@ public class GridSystem : MonoBehaviour {
         }
 
         //Check if keyboard is trying to rotate the stage
+<<<<<<< HEAD
         if (Input.GetKey("w") && cameraPhi < 90 - rotationRate)
+=======
+        if (Input.GetKey("w"))
+>>>>>>> master
         {
             cameraPhi += rotationRate;
             adjustCamera(cameraTheta, cameraPhi);
         }
+<<<<<<< HEAD
         if (Input.GetKey("s") && cameraPhi > rotationRate)
+=======
+        if (Input.GetKey("s"))
+>>>>>>> master
         {
             cameraPhi -= rotationRate;
             adjustCamera(cameraTheta, cameraPhi);
