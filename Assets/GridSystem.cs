@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 public class GridSystem : MonoBehaviour {
-
+    public Camera mainCamera;
 	public GameObject square;
 	public LayerMask hoverableLayers;
-
+    
 	//Grid Constants
 	const float gridSpacing = 1.02f;
 	const int X_MAX = 6;
@@ -20,6 +20,11 @@ public class GridSystem : MonoBehaviour {
 	//Camera Position Globals
 	float cameraTheta = 45; float cameraPhi = 45; //Starting Camera Angle 
 
+    public void SwitchCameras()
+    {
+        BattleSystem bs = this.GetComponent<BattleSystem>();
+        bs.startBattle();
+    }
 	// Use this for initialization
 	void Start() {
 
@@ -28,7 +33,7 @@ public class GridSystem : MonoBehaviour {
 		for (int u = 0; u < X_MAX; u++) {
 			for (int v = 0; v < Z_MAX; v++) {
 				Instantiate(square, new Vector3(gridSpacing * u + square.transform.localScale.x / 2, 0f, gridSpacing * v + square.transform.localScale.z / 2), Quaternion.identity);
-
+                
 			}
 		}
 	}
@@ -47,7 +52,7 @@ public class GridSystem : MonoBehaviour {
 	void Update () {
 		// Check if mouse is hovering over a grid
 		RaycastHit hit = new RaycastHit ();
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
 		if (Physics.Raycast (ray, out hit, 100, hoverableLayers)) {
 
