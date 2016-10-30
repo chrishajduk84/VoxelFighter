@@ -3,7 +3,7 @@
 public class GridSystem : MonoBehaviour {
 	public GameObject square;
 
-	const float gridSpacing = 1.2f;
+	const float gridSpacing = 1.03f;
     const int X_MAX = 6;
     const int Z_MAX = 6;
     const float FOV = 32;
@@ -36,16 +36,33 @@ public class GridSystem : MonoBehaviour {
 
 			}
 		}
-
-
-//		this.transform.position.Set (-10, 0, 0);
-//		this.transform.Translate (new Vector3(100, 0, 0));
-//		this.transform.Translate (new Vector3(-100, 0, 0));
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		// Check if mouse is hovering over a grid
+		RaycastHit hit = new RaycastHit ();
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		if (Physics.Raycast (ray, out hit)) {
+			Square square = hit.transform.gameObject.GetComponent<Square>();
+			if (square == null) return;
+			
+			square.ShowHelper ();
+			int id = square.GetHelperID ();
+
+			RemoveObjectsWithTag("HelperCube",id);
+		}
+	}
+
+	void RemoveObjectsWithTag(string tag, int id) {
+		GameObject[] objectsToRemove = GameObject.FindGameObjectsWithTag (tag);
+
+		foreach (GameObject obj in objectsToRemove) {
+			if (obj.GetInstanceID () != id)
+				Destroy (obj);
+		}
 
 	}
 }
